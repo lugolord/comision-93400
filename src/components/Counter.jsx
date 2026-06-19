@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
+import toast from 'react-hot-toast'
 import Button from './Button'
 
 function Counter ({ item }) {
@@ -13,11 +14,13 @@ function Counter ({ item }) {
   }
 
   const handleDecrease = () => {
+    if (count === 0) return
     setCount(prev => prev - 1)
   }
 
   const handleAddToCart = () => {
     addToCart({...item, count})
+    toast.success('Se agrego el producto al carrito 👍')
   }
 
   return (
@@ -37,6 +40,7 @@ function Counter ({ item }) {
         label='add to cart' 
         styles='bg-white text-black px-4 py-2 rounded cursor-pointer'
         onClick={handleAddToCart} 
+        disabled={count < 1}
       />
     </div>
   )

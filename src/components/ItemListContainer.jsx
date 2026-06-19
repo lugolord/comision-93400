@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
 import { getCollection, getProductsByCategory } from '../firebase/db'
 import ItemList from './ItemList'
+import ItemsSkeleton from './ItemsSkeleton'
 
 function ItemListContainer () {
   const [items, setItems] = useState([])
@@ -14,7 +15,9 @@ function ItemListContainer () {
   }, [categoryName])
   
   return (
-    <ItemList items={items} />
+    <>
+      {items.length === 0 ? <ItemsSkeleton /> : <ItemList items={items} />}
+    </>
   )
 }
 

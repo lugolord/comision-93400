@@ -6,12 +6,14 @@ function CartProvider ({ children }) {
 
   const getProductsQuantity = () => cart.reduce((acc, current) => acc + current.count, 0)
   
-  const addToCart = product => {
+  const addToCart = product => { // TODO: evitar agregar duplicados
     setCart([...cart, product])
   }
 
+  const clearCart = () => setCart([])
+
   return (
-    <CartContext.Provider value={{ cart, getProductsQuantity, addToCart }}>
+    <CartContext.Provider value={{ cart, getProductsQuantity, addToCart, clearCart }}>
       {children}
     </CartContext.Provider>
   )

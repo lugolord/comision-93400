@@ -2,10 +2,14 @@ import { CartContext } from '../context/CartContext'
 import { useContext } from 'react'
 import { createOrder } from '../firebase/db'
 import { serverTimestamp } from 'firebase/firestore'
+import { useNavigate } from 'react-router'
+import EmptyCart from './EmptyCart'
 
 function Checkout () {
-  const { cart } = useContext(CartContext)
+  const { cart, clearCart } = useContext(CartContext)
+  const navigate = useNavigate()
 
+  // TODO: manejar estados de carga y errores
   const handleCreateOrder = (e) => {
     e.preventDefault()
 
@@ -18,8 +22,16 @@ function Checkout () {
     createOrder({
       user: { name, email, phone, address },
       items: cart,
-      time: serverTimestamp()
+      time: serverTimestamp
     })
+
+    clearCart()
+
+    navigate('/')
+  }
+
+  if (cart.length === 0) {
+    return <EmptyCart />
   }
 
   return (

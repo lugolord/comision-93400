@@ -3,6 +3,8 @@ import { useParams } from 'react-router'
 import { getProductDetail } from '../firebase/db'
 import ItemDetail from './ItemDetail'
 
+// TODO: agregar skeleton de carga o loader
+
 function ItemDetailContainer () {
   const [item, setItem] = useState()
   const { id } = useParams()

@@ -4,6 +4,7 @@ import ItemListContainer from '../components/ItemListContainer'
 import ItemDetailContainer from '../components/ItemDetailContainer'
 import CartContainer from '../components/CartContainer'
 import Checkout from '../components/Checkout'
+import { Toaster } from 'react-hot-toast'
 
 function AppRouter () {
   return (
@@ -16,6 +17,7 @@ function AppRouter () {
         <Route path="/cart" element={<CartContainer />} />
         <Route path="/checkout" element={<Checkout />} />
       </Routes>
+      <Toaster position='bottom-right' />
     </BrowserRouter>
   )
 }

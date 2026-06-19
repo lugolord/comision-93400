@@ -1,10 +1,15 @@
 import { useContext } from 'react'
 import { CartContext } from '../context/CartContext'
 import { useNavigate } from 'react-router'
+import EmptyCart from './EmptyCart'
 
 function CartContainer () {
   const { cart } = useContext(CartContext)
   const navigate = useNavigate()
+
+  if (cart.length === 0) {
+    return <EmptyCart />
+  }
 
   return (
     <div className='px-5 mt-5'>
